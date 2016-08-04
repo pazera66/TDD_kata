@@ -4,8 +4,10 @@ package com.company;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Created by karol on 03.08.16.
@@ -60,10 +62,14 @@ public class Calculator {
 
     private List<Integer> convertToNumberArray(String[] stringArray) throws NegativeNumbersException {
 
-        List<Integer> numbersArray = new ArrayList<Integer>(){};
-        for (String s : stringArray) {
-            numbersArray.add(Integer.parseInt(s));
-        }
+
+        List<Integer> numbersArray = Arrays.asList(stringArray).stream().mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
+
+
+//        for (String s : stringArray) {
+//            numbersArray.add(Integer.parseInt(s));
+//        }
+
         checkForNegativeNumbers(numbersArray);
         return numbersArray;
     }
